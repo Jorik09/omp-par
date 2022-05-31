@@ -3,6 +3,8 @@
 #include "CVector1.h"
 
 #include <sstream>
+#include <chrono>
+#include <omp.h>
 using namespace std;
 
 CVector:: CVector(){}
@@ -75,10 +77,14 @@ CVector0 operator+(const CVector &first, const CVector &second) {  // перег
     }
 
     CVector0 temp (first.size());
-
+    auto begin = std::chrono::steady_clock::now();
+    #pragma omp parallel for
     for (int i = 0; i < first.size(); ++i) {
         temp.data[i] = first.data[i] + second.data[i];
     }
+    auto end = std::chrono::steady_clock::now();
+    auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
+    std::cout << "The time of addition: " << elapsed_ms.count() << " ms\n";
 
     return temp;
 }
@@ -97,9 +103,14 @@ CVector0 operator-(const CVector &first, const CVector &second) {  // перег
 
     CVector0 temp (first.size());
 
+    auto begin = std::chrono::steady_clock::now();
+    #pragma omp parallel for
     for (int i = 0; i < first.size(); ++i) {
         temp.data[i] = first.data[i] - second.data[i];
     }
+    auto end = std::chrono::steady_clock::now();
+    auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
+    std::cout << "The time of difference: " << elapsed_ms.count() << " ms\n";
 
     return temp;
 }

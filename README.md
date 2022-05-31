@@ -1,1 +1,1 @@
-# omp par
+# STL

@@ -28,6 +28,10 @@ int main() {
     CVector1 b(2);
     CVector0 s(2);
     CVector0 d(2);
+    CVector0 A(1000000);
+    CVector0 B(1000000);
+    CVector0 C(1000000);
+
     double h;
     a[0]= 1.1; a[1]= 2.2;
     b[0]= 1.0; b[1]= 1.0;
@@ -40,14 +44,20 @@ int main() {
     cout << "s "<< s;
     if ((s[0]==0.1)&&(s[1]==1.2))
         cout << "AT2 success"<< endl;
+    for (int i=0; i<100000;i++){
+        A[i]=i + (double)rand()/((double)rand()-10);
+        B[i]=i + (double)rand()/((double)rand()-10);
+    }
+    C= A+B;
+    C= A-B;
 
-    void parallel(int arr_size, size_t nn);
+    /*void parallel(int arr_size, size_t nn);
     int one, two;
     cout << "Enter array size and number of numbers" << endl;
 
     cin >> one >> two;
 
-    parallel(one, two);
+    parallel(one, two);*/
 
     ifstream in;
     in.open("input.txt");
